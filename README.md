@@ -9,7 +9,12 @@ At the end of the game, the number of killed monsters will be shown.
 
 ## How to run
 ```shell
-$ go run *.go
+$ go run main.go
+```
+
+## Test
+```shell
+$ go test ./rpg
 ```
 
 ## TODO
