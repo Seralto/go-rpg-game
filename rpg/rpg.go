@@ -8,12 +8,20 @@ import (
 
 var monsterKilled int
 
-// Function ToBattle starts the battle
+var monsters = []enemy{
+	enemy{name: "Skull-in", hp: 20, strength: 5},
+	enemy{name: "Werebat", hp: 12, strength: 4},
+	enemy{name: "Deadtree", hp: 6, strength: 3},
+}
+
+// ToBattle starts the battle
 func ToBattle() {
+	fmt.Printf("To battle!!!\n\n")
+
 	rand.Seed(time.Now().UnixNano())
 
 	hero := hero{
-		name:     "Conan",
+		name:     "Odin",
 		hp:       30,
 		strength: 6,
 	}
@@ -49,16 +57,8 @@ func ToBattle() {
 }
 
 func getMoster() enemy {
-	minHp := 8
-	maxHp := 12
-	minStrenght := 4
-	maxStrenght := 6
-
-	monster := enemy{
-		name:     "Scorpion",
-		hp:       rand.Intn(maxHp-minHp+1) + minHp,
-		strength: rand.Intn(maxStrenght-minStrenght+1) + minStrenght,
-	}
+	n := rand.Intn(len(monsters))
+	monster := monsters[n]
 
 	fmt.Printf("A %s appeared!!!\n", monster.name)
 	fmt.Printf("%v\n\n", monster)
