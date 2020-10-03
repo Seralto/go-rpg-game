@@ -1,4 +1,4 @@
-package main
+package rpg
 
 type weapon struct {
 	name   string
