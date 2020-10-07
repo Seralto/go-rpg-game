@@ -5,23 +5,23 @@ import (
 	"math/rand"
 )
 
-type enemy struct {
+type Enemy struct {
 	name     string
 	hp       int
 	strength int
 }
 
-func (e enemy) attack(target *hero) {
+func (e Enemy) attack(target *Hero) {
 	roundDamage := e.damage()
 	fmt.Printf("%s attacked %s, the damage was %d!\n", e.name, target.name, roundDamage)
 	target.hp -= roundDamage
 }
 
-func (e enemy) isAlive() bool {
+func (e Enemy) isAlive() bool {
 	return e.hp > 0
 }
 
-func (e enemy) String() string {
+func (e Enemy) String() string {
 	if e.isAlive() {
 		return fmt.Sprintf("%s: hp=%d, strength=%d", e.name, e.hp, e.strength)
 	}
@@ -29,7 +29,7 @@ func (e enemy) String() string {
 	return fmt.Sprintf("%v is dead!", e.name)
 }
 
-func (e enemy) damage() int {
+func (e Enemy) damage() int {
 	min := e.strength / 2
 	max := e.strength
 	return rand.Intn(max-min+1) + min

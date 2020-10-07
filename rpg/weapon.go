@@ -1,6 +1,6 @@
 package rpg
 
-type weapon struct {
+type Weapon struct {
 	name   string
 	damage int
 }

@@ -8,10 +8,10 @@ import (
 
 var monsterKilled int
 
-var monsters = []enemy{
-	enemy{name: "Skull-in", hp: 20, strength: 5},
-	enemy{name: "Werebat", hp: 12, strength: 4},
-	enemy{name: "Deadtree", hp: 6, strength: 3},
+var monsters = []Enemy{
+	Enemy{name: "Skull-in", hp: 20, strength: 5},
+	Enemy{name: "Werebat", hp: 12, strength: 4},
+	Enemy{name: "Deadtree", hp: 6, strength: 3},
 }
 
 // ToBattle starts the battle
@@ -20,13 +20,13 @@ func ToBattle() {
 
 	rand.Seed(time.Now().UnixNano())
 
-	hero := hero{
+	hero := Hero{
 		name:     "Odin",
 		hp:       30,
 		strength: 6,
 	}
 
-	weapon := weapon{
+	weapon := Weapon{
 		name:   "Sword",
 		damage: 3,
 	}
@@ -34,7 +34,7 @@ func ToBattle() {
 	hero.equip(weapon)
 
 	for hero.isAlive() {
-		monster := getMoster()
+		monster := getRandomMonster()
 
 		for monster.isAlive() && hero.isAlive() {
 			hero.attack(&monster)
@@ -42,12 +42,11 @@ func ToBattle() {
 
 			if !monster.isAlive() {
 				fmt.Printf("-------------------------\n\n")
+				continue
 			}
 
-			if monster.isAlive() {
-				monster.attack(&hero)
-				fmt.Printf("%v\n\n", hero)
-			}
+			monster.attack(&hero)
+			fmt.Printf("%v\n\n", hero)
 		}
 
 		monsterKilled++
@@ -56,7 +55,7 @@ func ToBattle() {
 	fmt.Printf("%v have killed %v monsters!\n\n", hero.name, monsterKilled)
 }
 
-func getMoster() enemy {
+func getRandomMonster() Enemy {
 	n := rand.Intn(len(monsters))
 	monster := monsters[n]
 
